@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MK步骤图 - 跨浏览器兼容+零缓存依赖</title>
+    <!-- 移除浏览器缓存相关配置，解决换浏览器失效问题 -->
+    <!-- 核心脚本：一行引入，跨浏览器/新设备/清缓存后依旧可用 -->
+    <script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer></script>
+    <!-- 可选PWA离线缓存配置：开发者按需开启，适配重度离线场景（新增） -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <!-- 页面基础样式：仅美化，无外部依赖，跨浏览器兼容 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; }
+        body { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; line-height: 1.8; color: #333; }
+        h1 { color: #2563eb; margin-bottom: 1rem; font-size: 2rem; text-align: center; }
+        h2 { margin: 2.5rem 0 1rem; color: #1e40af; border-left: 4px solid #2563eb; padding-left: 0.8rem; }
+        h3 { margin: 1.5rem 0 0.8rem; color: #1e3a8a; }
+        pre, code { background: #f8fafc; padding: 0.5rem; border-radius: 6px; font-size: 0.95rem; color: #dc2626; font-family: Consolas, Monaco, monospace; }
+        pre { padding: 1rem; margin: 1rem 0; overflow-x: auto; border: 1px solid #e2e8f0; }
+        .demo-box { margin: 2rem 0; padding: 2rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fdfdfd; }
+        .tip-box { margin: 1rem 0; padding: 1rem; background: #fef7ed; border-radius: 6px; border-left: 4px solid #f97316; }
+        .open-source { margin-top: 3rem; padding: 1.5rem; background: #eef2ff; border-radius: 8px; border: 1px solid #c7d2fe; }
+        p { margin: 1rem 0; }
+        ul { margin: 1rem 0 1rem 2rem; list-style: disc; line-height: 2; }
+        a { color: #2563eb; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.3rem; }
+            .demo-box { padding: 1.5rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>MK步骤图 - 基于表情递进灵感😂→😒→😝</h1>
+    <p style="text-align: center; color: #64748b;">核心特性：跨浏览器兼容/零缓存依赖/一行引入/远程+本地图片全支持</p>
+
+    <!-- 演示区域 -->
+    <div class="demo-box">
+        <h3>演示1：远程网络图片（跨浏览器直接预览）</h3>
+        <mk img src="https://cdn.pixabay.com/photo/2025/08/23/14/34/red-rose-9792176_1280.jpg=>https://cdn.pixabay.com/photo/2024/12/13/10/23/woman-9264735_1280.jpg"></mk>
+        <h3>演示2：本地图片格式（换浏览器后，本地路径仍正常解析）</h3>
+        <mk img src="img/step1.png=>img/step2.png=>img/step3.png"></mk>
+    </div>
+
+    <!-- 核心使用方法：强调跨浏览器无依赖 -->
+    <h2>一、核心使用步骤（2步极简，换浏览器/新设备直接用）</h2>
+    <div class="tip-box">
+        ✅ 无需依赖浏览器缓存，✅ 换Chrome/Firefox/Edge/Safari均生效，✅ 清缓存/新设备一键可用
+    </div>
+    <p><b>步骤1：插入脚本（直接复制到HTML的&lt;head&gt;内，唯一引入代码）</b></p>
+    <pre>&lt;script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer&gt;&lt;/script&gt;</pre>
+    <p><b>步骤2：编写&lt;mk&gt;标签（表情递进式语法，直接书写）</b></p>
+    <pre>&lt;mk img src="图片1路径=&gt;图片2路径=&gt;图片3路径"&gt;&lt;/mk&gt;</pre>
+
+    <!-- 路径支持：跨浏览器全兼容 -->
+    <h2>二、支持的图片路径（跨浏览器无差异，在线/离线均适配）</h2>
+    <ul>
+        <li><b>本地相对路径</b>（推荐）：<code>img/step1.png=&gt;./step2.png=&gt;../static/3.png</code>（换浏览器后，本地文件存在即解析）</li>
+        <li><b>远程网络URL</b>：<code>https://xxx.com/1.jpg=&gt;https://xxx.com/2.jpg</code>（有网络即可，跨浏览器无缓存依赖）</li>
+        <li><b>本地绝对路径</b>：<code>C:/project/1.png=&gt;/User/project/2.png</code>（适配本地开发，跨浏览器兼容）</li>
+        <li><b>内网路径</b>：<code>http://192.168.1.100/1.png</code>（企业无外网场景，跨浏览器可用）</li>
+    </ul>
+
+    <!-- 自定义配置：跨浏览器同步生效 -->
+    <h2>三、自定义配置（可选，无需修改脚本，跨浏览器直接用）</h2>
+    <p>在脚本引入后添加配置，箭头/颜色/尺寸可自定义，换浏览器后无需重新配置：</p>
+    <pre>&lt;script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer&gt;&lt;/script&gt;
+&lt;script&gt;
+    // 自定义示例：箭头改➡️、颜色橙色、图片120px
+    window.MKStepConfig = {
+        arrowText: '➡️',    // 任意字符/表情均可
+        arrowColor: '#f60',  // 十六进制/RGB/RGBA均支持
+        imgWidth: '120px',   // PC端宽度，移动端自动适配
+        imgHeight: '120px',  // PC端高度，移动端自动适配
+        gap: '15px'          // 图片与箭头间距
+    };
+&lt;/script&gt;</pre>
+
+    <!-- 动态解析：跨浏览器兼容 -->
+    <h2>四、动态生成标签解析（可选）</h2>
+    <p>JS动态生成&lt;mk&gt;标签后，调用全局方法即可解析，跨浏览器无差异：</p>
+    <pre>// 动态创建标签后执行此方法，立即解析
+window.parseMKStepTags();</pre>
+
+    <!-- 离线方案：分2种，适配不同开发者需求（重点解决换浏览器问题） -->
+    <h2>五、离线使用方案（适配换浏览器/无网络，2种可选）</h2>
+    <div class="tip-box">
+        💡 放弃「浏览器缓存」方案，改为「纯本地无依赖」+「PWA 主动缓存」，彻底解决换浏览器离线失效问题
+    </div>
+    <h3>方案1：轻量离线（推荐，开发者零配置）</h3>
+    <p>将<code>mk-step-parser.js</code>脚本<strong>直接复制到本地项目</strong>（无需专门下载，复制代码即可），本地引入脚本，无网络/换浏览器均可用：</p>
+    <pre>// 本地项目创建js文件夹，放入脚本，本地引入（无网络依赖）
+&lt;script src="js/mk-step-parser.js" defer&gt;&lt;/script&gt;</pre>
+    <p>✅ 优势：零缓存依赖，换任何浏览器/新设备，只要本地有脚本文件，即可离线运行；✅ 操作简单，无需学习PWA/缓存配置。</p>
+
+    <h3>方案2：重度离线（PWA 主动缓存，按需开启）</h3>
+    <p>为项目添加<strong>PWA 清单文件</strong>，主动缓存脚本+页面+本地图片，实现「安装到桌面+完全离线」，换浏览器（安装PWA后）也能离线使用，步骤如下：</p>
+    <ol style="margin: 1rem 0 1rem 2rem; line-height: 2;">
+        <li>项目根目录创建<code>manifest.json</code>（复制下方代码，修改配置）；</li>
+        <li>页面引入PWA相关标签（本页面已添加，直接复制）；</li>
+        <li>浏览器访问页面后，点击「安装到桌面」，即可实现完全离线，换设备/清缓存后仍可用。</li>
+    </ol>
+    <p><code>manifest.json</code>配置代码（直接复制使用）：</p>
+    <pre>{
+    "name": "MK步骤图",
+    "short_name": "MKStep",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "icons": [
+        {
+            "src": "img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "files": ["/", "/js/mk-step-parser.js", "/img/step1.png"] // 缓存需要离线的文件
+}</pre>
+
+    <!-- 开源范围与协议：清晰明确 -->
+    <div class="open-source">
+        <h2 style="margin: 0 0 1.5rem 0; color: #1e40af; border: none; padding: 0;">📚 开源范围与协议</h2>
+        <p><b>开源协议</b>：MIT 开源协议（<strong>跨平台/跨浏览器无限制</strong>）</p>
+        <p>✅ 自由使用：商业/非商业项目、个人/企业开发均可直接使用；</p>
+        <p>✅ 自由修改：可根据需求修改脚本代码，适配自定义场景；</p>
+        <p>✅ 自由分发：可将修改后的代码分发、部署，无需授权。</p>
+        <p><b>完整开源范围</b>：核心脚本<code>mk-step-parser.js</code>所有代码均开源，包含：标签解析逻辑、内置响应式样式、路径清洗、图片兜底、自定义配置、动态解析方法，无隐藏代码/闭源模块。</p>
+        <p><b>使用要求</b>：无强制要求，保留脚本作者署名即可（可选）。</p>
+        <p><b>脚本仓库</b>：<a href="https://github.com/25eqsg3f08/mk-step-parser" target="_blank">https://github.com/25eqsg3f08/mk-step-parser</a>（可获取最新代码、提交问题）</p>
+    </div>
+</body>
+</html>
