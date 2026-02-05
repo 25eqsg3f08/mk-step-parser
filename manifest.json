@@ -9,13 +9,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "img/icon-192x192.png", // 可选：添加192x192/png图标，放到img目录
+      "src": "icon-192x192.png", // 可选：添加192x192/png图标，放到img目录
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "img/icon-512x512.png", // 可选：添加512x512/png图标
+      "src": "icon-512x512.png", // 可选：添加512x512/png图标
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
