@@ -134,3 +134,13 @@ window.parseMKStepTags();</pre>
     </div>
 </body>
 </html>
+<script>
+     // 仅检测SW支持并注册，无其他逻辑，极简
+     if ('serviceWorker' in navigator) {
+       window.addEventListener('load', () => {
+         navigator.serviceWorker.register('/sw.js')
+           .then(() => console.log('SW注册成功，已开启离线缓存'))
+           .catch(err => console.error('SW注册失败：', err));
+       });
+     }
+</script>
