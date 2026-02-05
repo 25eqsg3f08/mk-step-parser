@@ -2,20 +2,20 @@
   "name": "MK步骤图 - 表情递进式步骤解析",
   "short_name": "MKStep",
   "description": "基于中文课表情递进灵感的极简步骤图解析工具，零下载、一行引入、离线兼容",
-  "start_url": "/",
+  "start_url": "https://25eqsg3f08.github.io/mk-step-parser/",
   "display": "standalone", // 独立窗口运行（类似APP）
   "background_color": "#ffffff",
   "theme_color": "#2563eb", // 主题色（和脚本箭头色一致）
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "icon-192x192.png", // 可选：添加192x192/png图标，放到img目录
+      "src": "https://25eqsg3f08.github.io/mk-step-parser/icon-192x192.png", // 可选：添加192x192/png图标，放到img目录
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512x512.png", // 可选：添加512x512/png图标
+      "src": "/mk-step-parser/icon-512x512.png", // 可选：添加512x512/png图标
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -26,8 +26,8 @@
   "files": [
     "/",
     "/index.html",
-    "/mk-step-parser.js",
-    "/sw.js",
-    "/manifest.json"
+    "mk-step-parser/mk-step-parser.js",
+    "/mk-step-parser//sw.js",
+    "/mk-step-parser//manifest.json"
   ]
 }
