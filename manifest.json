@@ -1,0 +1,16 @@
+{
+    "name": "MK步骤图",
+    "short_name": "MKStep",
+    "start_url": "mk-step-parser/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "icons": [
+        {
+            "src": "img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "files": ["mk-step-parser/index.html", "/js/mk-step-parser.js", "/img/step1.png"] // 缓存需要离线的文件
+}
