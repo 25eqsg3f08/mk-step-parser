@@ -1,14 +1,99 @@
 <!DOCTYPE html>
-<!-- 仅需这一行，零下载、开箱即用，断网也兼容 -->
-<script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js"></script>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK步骤图 - 零下载+离线兼容</title>
+    <title>MK步骤图 - 零下载+离线兼容+自动缓存</title>
+    <!-- 浏览器自动缓存配置：强制缓存1年，协商缓存，提升离线使用概率 -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, must-revalidate">
+    <meta http-equiv="Expires" content="Mon, 04 Feb 2027 00:00:00 GMT">
+    <!-- 规范引入脚本：放在head，添加defer保证DOM加载完成后执行，避免解析失败 -->
+    <script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer></script>
+    <!-- 页面基础样式，仅美化演示页面，不影响核心解析功能 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
+        body { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; line-height: 1.8; color: #333; }
+        h1 { color: #2563eb; margin-bottom: 1rem; font-size: 2rem; }
+        h2 { margin: 2rem 0 1rem; color: #1e40af; border-left: 4px solid #2563eb; padding-left: 0.8rem; }
+        pre, code { background: #f8fafc; padding: 0.5rem; border-radius: 6px; font-size: 0.95rem; color: #dc2626; }
+        pre { padding: 1rem; margin: 1rem 0; overflow-x: auto; border: 1px solid #e2e8f0; }
+        .demo-box { margin: 1.5rem 0; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fdfdfd; }
+        .open-source { margin-top: 3rem; padding: 1rem; background: #eef2ff; border-radius: 8px; border: 1px solid #c7d2fe; }
+        p { margin: 1rem 0; }
+        a { color: #2563eb; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <!-- 你的标准标签，完全不变 -->
-    <mk img src="1.png=>2.png=>3.png"></mk>
-    <mk img src="https://cdn.pixabay.com/photo/2025/08/23/14/34/red-rose-9792176_1280.jpg=>https://cdn.pixabay.com/photo/2024/12/13/10/23/woman-9264735_1280.jpg"></mk>
+    <h1>MK步骤图 - 核心演示（基于表情递进灵感😂→😒→😝）</h1>
+    <p>核心特性：<b>零下载开箱即用</b>、<b>浏览器自动缓存</b>、<b>离线兼容</b>、<b>远程/本地图片全支持</b></p>
+
+    <!-- 演示区域 -->
+    <div class="demo-box">
+        <h3>演示效果1：本地图片路径（离线可解析）</h3>
+        <mk img src="1.png=>2.png=>3.png"></mk>
+        <h3 style="margin-top: 1.5rem;">演示效果2：远程网络图片（在线预览）</h3>
+        <mk img src="https://cdn.pixabay.com/photo/2025/08/23/14/34/red-rose-9792176_1280.jpg=>https://cdn.pixabay.com/photo/2024/12/13/10/23/woman-9264735_1280.jpg"></mk>
+    </div>
+
+    <!-- 核心使用方法 -->
+    <h2>一、核心使用步骤（仅2步，零配置）</h2>
+    <p><b>步骤1：插入脚本引入代码</b>（直接复制到HTML的&lt;head&gt;标签内即可）</p>
+    <pre>&lt;script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer&gt;&lt;/script&gt;</pre>
+    <p><b>步骤2：编写&lt;mk&gt;标签</b>（按「路径1=&gt;路径2=&gt;路径3」格式书写，和画表情递进一样简单）</p>
+    <pre>&lt;mk img src="图片1路径=&gt;图片2路径=&gt;图片3路径"&gt;&lt;/mk&gt;</pre>
+
+    <!-- 路径支持说明 -->
+    <h2>二、支持的图片路径类型（全场景兼容）</h2>
+    <ul style="margin: 1rem 0 1rem 2rem; list-style: disc;">
+        <li><b>本地相对路径</b>（推荐，离线优先）：<code>img/step1.png=&gt;./step2.png=&gt;../static/step3.png</code></li>
+        <li><b>远程网络URL</b>（在线预览）：<code>https://xxx.com/1.jpg=&gt;https://xxx.com/2.jpg</code></li>
+        <li><b>本地绝对路径</b>（离线）：<code>C:/project/1.png=&gt;/User/project/2.png</code></li>
+        <li><b>内网路径</b>（企业无外网）：<code>http://192.168.1.100/1.png=&gt;http://192.168.1.100/2.png</code></li>
+    </ul>
+
+    <!-- 自定义配置教程 -->
+    <h2>三、自定义配置（可选，无需修改脚本）</h2>
+    <p>在脚本引入后添加自定义配置代码，可修改箭头、颜色、图片尺寸等，示例如下：</p>
+    <pre>&lt;script src="https://25eqsg3f08.github.io/mk-step-parser/mk-step-parser.js" defer&gt;&lt;/script&gt;
+&lt;script&gt;
+    // 自定义配置示例：箭头改为➡️、颜色改为橙色、图片宽度120px
+    window.MKStepConfig = {
+        arrowText: '➡️',    // 步骤箭头，支持任意字符/表情
+        arrowColor: '#f60',  // 箭头颜色（十六进制/RGB）
+        imgWidth: '120px',   // PC端图片宽度
+        imgHeight: '120px',  // PC端图片高度
+        gap: '15px'          // 图片与箭头间距
+    };
+&lt;/script&gt;</pre>
+
+    <!-- 自动缓存说明 -->
+    <h2>四、浏览器自动缓存说明（离线兼容核心）</h2>
+    <p>1. 脚本引入后，<b>浏览器会自动强制缓存1年</b>，首次加载后，断网/无网络环境下打开页面仍能正常解析&lt;mk&gt;标签；</p>
+    <p>2. 缓存策略为「强制缓存+协商缓存」，脚本更新后会自动拉取最新版本，无需手动清理缓存；</p>
+    <p>3. 本地图片无需缓存配置，直接使用相对路径即可实现离线解析。</p>
+
+    <!-- 动态解析方法 -->
+    <h2>五、动态生成标签解析（可选）</h2>
+    <p>若通过JS动态生成&lt;mk&gt;标签，调用全局方法即可重新解析，示例：</p>
+    <pre>// 动态生成标签后执行
+window.parseMKStepTags();</pre>
+
+    <!-- 开源范围与协议 -->
+    <div class="open-source">
+        <h2 style="margin: 0 0 1rem 0; color: #1e40af; border: none; padding: 0;">📚 开源范围与协议</h2>
+        <p><b>开源协议</b>：MIT 开源协议（自由使用、修改、分发，商业/非商业项目均可）</p>
+        <p><b>开源范围</b>：核心解析脚本 <code>mk-step-parser.js</code> 完全开源，包含以下全部内容：</p>
+        <ul style="margin: 1rem 0 1rem 2rem; list-style: disc;">
+            <li>&lt;mk&gt;标签核心解析逻辑</li>
+            <li>浏览器自动缓存适配代码</li>
+            <li>内置响应式CSS样式（无外部依赖）</li>
+            <li>图片路径清洗、加载兜底功能</li>
+            <li>自定义配置、动态解析全局方法</li>
+            <li>PC/平板/移动端全端适配代码</li>
+        </ul>
+        <p><b>使用限制</b>：无任何使用限制，保留脚本作者署名即可（可选）</p>
+        <p><b>脚本仓库</b>：<a href="https://github.com/25eqsg3f08/mk-step-parser" target="_blank">https://github.com/25eqsg3f08/mk-step-parser</a></p>
+    </div>
 </body>
 </html>
